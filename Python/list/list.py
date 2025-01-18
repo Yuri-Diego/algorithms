@@ -35,6 +35,16 @@ class List:
         self.data[index] = value
         self.size += 1
 
+    def search(self, key):
+        if self.size == 0:
+            raise ValueError("empty list")
+        
+        for i in range(self.size):
+            if self.data[i] == key:
+                return i, self.data[i]
+            
+        raise ValueError(f"{key} not found")
+
     def remove(self, value):
         for i in range(self.size):
             if self.data[i] == value:
