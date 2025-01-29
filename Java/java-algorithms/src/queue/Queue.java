@@ -1,15 +1,15 @@
-package Queue;
+package queue;
 
 // Implementacao Classica de uma Fila(queue) Circular.
 
-public class queue<T> {
+public class Queue<T> {
     private final Object[] items;
     private final int capacity;
     private int front;
     private int pointer;
     private int size;
 
-    public queue(int capacity) {
+    public Queue(int capacity) {
         this.capacity = capacity;
         items = new Object[capacity];
         front = 0;

@@ -1,4 +1,4 @@
-package Stack;
+package stack;
 
 public class MinStack<T extends Comparable<T>> {
     private final Stack<T> stack;
