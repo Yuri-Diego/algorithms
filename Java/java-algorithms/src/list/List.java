@@ -2,6 +2,8 @@ package list;
 
 // Implementacao Classica de uma Lista(list).
 
+import java.util.NoSuchElementException;
+
 public class List<T> {
     private int capacity;
     private Object[] items;
@@ -15,31 +17,28 @@ public class List<T> {
 
     }
 
-    public void _resize() {
+    private void resize() {
         int newCapacity = capacity * 2;
         Object[] newData = new Object[newCapacity];
-
-        for (int i = 0; i < this.size; i++) {
-            newData[i] = items[i];
-        }
+        System.arraycopy(items, 0, newData, 0, size);
         items = newData;
         capacity = newCapacity;
     }
 
     public void append(T item) {
         if (size == capacity) {
-            _resize();
+            resize();
         }
         items[size] = item;
         size++;
     }
 
     public void insert(T item, int index) {
-        if (size == capacity) {
-            _resize();
-        }
-        if (index < 0 || index >= size) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        if (size == capacity) {
+            resize();
         }
         for (int i = size; i > index; i--) {
             items[i] = items[i - 1];
@@ -50,7 +49,7 @@ public class List<T> {
 
     public T pop(){
         if (size == 0) {
-            throw new IndexOutOfBoundsException("list is empty");
+            throw new NoSuchElementException("list is empty");
         }
         size--;
         T value = (T) items[size];
@@ -66,6 +65,7 @@ public class List<T> {
         for (int i = index; i < size - 1; i++) {
             items[i] = items[i + 1];
         }
+        items[size - 1] = null;
         size--;
         return item;
     }
